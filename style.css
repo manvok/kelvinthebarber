@@ -38,11 +38,12 @@ html {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(26, 26, 26, 0.95);
+  background: rgba(26, 26, 26, 0.98);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  padding: 15px 0;
+  padding: 20px 0;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
 }
 
 .nav-container {
@@ -52,6 +53,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .logo {
@@ -60,12 +62,15 @@ html {
   color: var(--primary-color);
   font-family: "Playfair Display", serif;
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
@@ -75,12 +80,13 @@ html {
   font-size: 0.95rem;
   transition: var(--transition);
   position: relative;
+  padding: 5px 0;
 }
 
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
@@ -100,11 +106,13 @@ html {
   background: var(--primary-color);
   color: var(--secondary-color);
   border: none;
-  padding: 10px 25px;
+  padding: 12px 28px;
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  white-space: nowrap;
+  font-size: 0.95rem;
 }
 
 .book-btn:hover {
@@ -118,6 +126,7 @@ html {
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
+  z-index: 1001;
 }
 
 .hamburger span {
@@ -128,9 +137,22 @@ html {
   transition: var(--transition);
 }
 
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
   position: relative;
+  min-height: 100vh;
   height: 100vh;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   display: flex;
@@ -138,6 +160,7 @@ html {
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  padding-top: 80px; /* Space for fixed navbar */
 }
 
 .hero::before {
@@ -149,6 +172,7 @@ html {
   bottom: 0;
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path fill="rgba(212,175,55,0.03)" d="M0,100 Q300,200 600,100 T1200,100 L1200,600 L0,600 Z"/></svg>');
   background-size: cover;
+  pointer-events: none;
 }
 
 .hero-overlay {
@@ -157,7 +181,8 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.5) 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
+  pointer-events: none;
 }
 
 .hero-content {
@@ -165,6 +190,7 @@ html {
   z-index: 2;
   color: var(--white);
   animation: fadeInUp 1s ease;
+  padding: 20px;
 }
 
 .hero-badge {
@@ -177,14 +203,16 @@ html {
   margin-bottom: 20px;
   color: var(--primary-color);
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 .hero-title {
   font-family: "Playfair Display", serif;
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 900;
   margin-bottom: 15px;
   letter-spacing: 3px;
+  line-height: 1.1;
   background: linear-gradient(135deg, var(--white) 0%, var(--primary-color) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -192,7 +220,7 @@ html {
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 3vw, 1.5rem);
   letter-spacing: 3px;
   margin-bottom: 10px;
   color: var(--primary-color);
@@ -200,7 +228,7 @@ html {
 }
 
 .hero-description {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   margin-bottom: 35px;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 300;
@@ -210,6 +238,7 @@ html {
   display: flex;
   gap: 20px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .btn-primary,
@@ -258,6 +287,7 @@ html {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.85rem;
   animation: bounce 2s infinite;
+  z-index: 2;
 }
 
 .scroll-arrow {
@@ -672,12 +702,16 @@ html {
   .nav-menu {
     position: fixed;
     left: -100%;
-    top: 70px;
+    top: 0;
     flex-direction: column;
     background: rgba(26, 26, 26, 0.98);
+    backdrop-filter: blur(10px);
     width: 100%;
-    padding: 30px 0;
+    height: 100vh;
+    padding: 100px 0 30px;
     transition: var(--transition);
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .nav-menu.active {
@@ -692,6 +726,11 @@ html {
     display: none;
   }
 
+  .hero {
+    padding-top: 70px;
+    min-height: 100vh;
+  }
+
   .hero-title {
     font-size: 3rem;
   }
@@ -703,6 +742,12 @@ html {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 300px;
   }
 
   .section-title {
@@ -726,8 +771,31 @@ html {
 }
 
 @media (max-width: 600px) {
+  .navbar {
+    padding: 15px 0;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .hero {
+    padding-top: 60px;
+  }
+
   .hero-title {
     font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .hero-badge {
+    font-size: 0.75rem;
+    padding: 6px 16px;
   }
 
   .section-title {
@@ -740,5 +808,10 @@ html {
 
   .social {
     flex-direction: column;
+  }
+
+  .scroll-indicator {
+    bottom: 20px;
+    font-size: 0.75rem;
   }
 }
