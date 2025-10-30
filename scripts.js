@@ -18,8 +18,6 @@ const navLinks = document.querySelectorAll('.nav-link');
 if (hamburger) {
   hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
-    
-    // Animate hamburger
     hamburger.classList.toggle('active');
   });
 
@@ -43,7 +41,7 @@ window.addEventListener('scroll', () => {
     navbar.style.padding = '10px 0';
     navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.2)';
   } else {
-    navbar.style.padding = '15px 0';
+    navbar.style.padding = '20px 0';
     navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
   }
   
@@ -59,7 +57,6 @@ galleryImages.forEach(img => {
     console.log('Image clicked:', img.src);
   });
 });
-
 // Intersection Observer for fade-in animations
 const observerOptions = {
   threshold: 0.1,
